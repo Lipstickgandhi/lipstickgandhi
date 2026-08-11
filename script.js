@@ -1,25 +1,39 @@
-// Select the theme toggle button
-const themeToggleBtn = document.getElementById('theme-toggle');
+// Sidebar dropdown toggles
+document.querySelectorAll('.nav-group-toggle').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var expanded = this.getAttribute('aria-expanded') === 'true';
+    var list = this.nextElementSibling;
 
-// Add a click event listener to toggle dark mode
-themeToggleBtn.addEventListener('click', () => {
-  // Toggle the 'dark-mode' class on the body
-  document.body.classList.toggle('dark-mode');
+    this.setAttribute('aria-expanded', String(!expanded));
+    if (expanded) {
+      list.hidden = true;
+    } else {
+      list.hidden = false;
+    }
+  });
 
-  // Save the current theme to localStorage
-  const isDarkMode = document.body.classList.contains('dark-mode');
-  localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
 });
 
-// Load the saved theme on page load
-window.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('theme');
-  const isDarkMode = savedTheme === 'dark';
+// Mobile sidebar toggle
+var sidebarToggle = document.getElementById('sidebar-toggle');
+var sidebar = document.getElementById('sidebar');
 
-  // Apply the saved theme
-  if (isDarkMode) {
-    document.body.classList.add('dark-mode');
-  } else {
-    document.body.classList.remove('dark-mode');
-  }
-});
+if (sidebarToggle && sidebar) {
+  sidebarToggle.addEventListener('click', function() {
+    var isOpen = sidebar.classList.toggle('open');
+    sidebarToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', function(e) {
+    if (
+      sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== sidebarToggle
+    ) {
+      sidebar.classList.remove('open');
+      sidebarToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
