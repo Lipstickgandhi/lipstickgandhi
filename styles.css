@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+html, body {
+  min-height: 100%;
+}
+
 body {
   font-family: 'Courier New', Courier, monospace;
   line-height: 1.6;
@@ -21,21 +25,23 @@ body {
 .layout {
   display: flex;
   min-height: 100vh;
+  align-items: stretch;
 }
 
 /* =============================================
    SIDEBAR
    ============================================= */
 .sidebar {
-  width: 300px;
+  width: 420px;
   flex-shrink: 0;
   background: #fff;
-  border-right: none;
+  border-right: 3px solid #000;
   padding: 1.5rem 0;
   display: flex;
   flex-direction: column;
   position: sticky;
   top: 0;
+  min-height: 100vh;
   height: 100vh;
   overflow-y: auto;
 }
@@ -44,9 +50,9 @@ body {
 .sidebar-logo-placeholder {
   margin: 1rem 1.25rem 2rem;
   height: 140px;
-  border: 2px dashed #bbb;
-  border-radius: 6px;
-  background: #ececec;
+  border: 2px solid #000;
+  border-radius: 0;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,7 +67,7 @@ body {
 
 /* --- Nav groups (collapsible) --- */
 .nav-group {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #000;
 }
 
 .nav-group-toggle {
@@ -81,8 +87,8 @@ body {
 
 .nav-group-toggle:hover,
 .nav-group-toggle:focus {
-  background: #e8e8e8;
-  outline: 2px solid #888;
+  background: #fff;
+  outline: 2px solid #000;
   outline-offset: -2px;
 }
 
@@ -99,7 +105,7 @@ body {
 .nav-group-list {
   list-style: none;
   padding: 0.25rem 0;
-  background: #efefef;
+  background: #fff;
 }
 
 .nav-group-list li a {
@@ -112,15 +118,15 @@ body {
 
 .nav-group-list li a:hover,
 .nav-group-list li a:focus {
-  background: #ddd;
-  outline: 2px solid #888;
+  background: #fff;
+  outline: 2px solid #000;
   outline-offset: -2px;
   text-decoration: underline;
 }
 
 /* Standalone nav link */
 .nav-standalone-wrap {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #000;
 }
 
 .nav-standalone {
@@ -133,8 +139,8 @@ body {
 
 .nav-standalone:hover,
 .nav-standalone:focus {
-  background: #e8e8e8;
-  outline: 2px solid #888;
+  background: #fff;
+  outline: 2px solid #000;
   outline-offset: -2px;
 }
 
@@ -143,21 +149,26 @@ body {
    ============================================= */
 .main-content {
   flex: 1;
-  padding: 2.5rem 2rem;
-  max-width: 900px;
+  padding: 2.5rem 2rem 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #fff;
 }
 
 .site-title {
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: bold;
   color: #111;
+}
+
+/* white content box */
+.content-panel {
+  width: min(100%, 1100px);
+  min-height: calc(100vh - 5rem);
   background: #fff;
-  padding: 2rem 3rem;
   border: 3px solid #000;
-  text-align: center;
+  padding: 3rem 3.5rem;
 }
 
 /* =============================================
@@ -180,7 +191,7 @@ body {
 }
 
 .sidebar-toggle-btn:focus {
-  outline: 2px solid #555;
+  outline: 2px solid #000;
 }
 
 /* =============================================
@@ -214,5 +225,10 @@ body {
 
   .main-content {
     padding: 4rem 1.25rem 2rem;
+  }
+
+  .content-panel {
+    min-height: auto;
+    padding: 2rem 1.25rem;
   }
 }
